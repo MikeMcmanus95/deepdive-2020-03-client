@@ -8,9 +8,11 @@ const AllOptions = (props) => {
   const [options, setOptions] = React.useState([]);
 
   const getOptions = async () => {
-    const { data } = await axios.get("/api/options");
+    const { data } = await axios.get(
+      'https://codetyke-server.herokuapp.com/api/options'
+    );
     setOptions(data);
-  }
+  };
 
   React.useEffect(() => {
     getOptions();
@@ -22,7 +24,7 @@ const AllOptions = (props) => {
         <h2>Options</h2>
       </div>
       <div>
-        {options.map(option =>
+        {options.map((option) => (
           <div className="option__item" key={option.id}>
             <div className="option__item-body">
               {option.body} {option.id}
@@ -32,14 +34,13 @@ const AllOptions = (props) => {
                 history={props.history}
               />
             </div>
-            <div className="option__item-img">
-              {option.imgUrl}
-            </div>
-          </div>)}
+            <div className="option__item-img">{option.imgUrl}</div>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 // <a href={`/${question.id}`}>{question.id}</a>
 // // the difference between using a href and react router link: a href will cause the page to hard refresh/reload

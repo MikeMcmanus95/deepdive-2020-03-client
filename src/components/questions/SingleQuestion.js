@@ -11,12 +11,16 @@ const SingleQuestion = (props) => {
 
   const getQuestion = async () => {
     const { id } = props.match.params;
-    const { data } = await axios.get(`/api/questions/${id}`);
+    const { data } = await axios.get(
+      `https://codetyke-server.herokuapp.com/api/questions/${id}`
+    );
     setQuestion(data);
   };
 
   const getAllOptions = async () => {
-    const { data } = await axios.get('/api/options');
+    const { data } = await axios.get(
+      'https://codetyke-server.herokuapp.com/api/options'
+    );
     setAllOptions(data);
   };
   // console.log('props?', props);
@@ -31,7 +35,10 @@ const SingleQuestion = (props) => {
         optionId: option.id,
         isAnswer: false,
       };
-      await axios.post('/api/questionOptions', dataToSend);
+      await axios.post(
+        'https://codetyke-server.herokuapp.com/api/questionOptions',
+        dataToSend
+      );
       getQuestion();
     });
   };
