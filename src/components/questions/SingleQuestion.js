@@ -13,38 +13,28 @@ const SingleQuestion = (props) => {
     const { id } = props.match.params;
     const { data } = await axios.get(`/api/questions/${id}`);
     setQuestion(data);
-  }
+  };
 
   const getAllOptions = async () => {
-    const { data } = await axios.get("/api/options");
+    const { data } = await axios.get('/api/options');
     setAllOptions(data);
-  }
+  };
   // console.log('props?', props);
-  console.log('question state', question)
+  console.log('question state', question);
   // console.log('all options >>>', allOptions)
 
   const handleSubmit = async () => {
-    // const makeAssociation = () => {
-
-    // }
-
-    // async function asyncForEach(array, callback) {
-    //   for (let index = 0; index < array.length; index++) {
-    //     await callback(array[index], index, array);
-    //   }
-    // }
-
-    // console.log('options to add?', optionsToAdd);
-    // optionsToAdd.forEach(option => {
-    //   const dataToSend = {
-    //     questionId: question.id,
-    //     optionId: option.id,
-    //     isAnswer: false
-    //   }
-    //   await axios.post("/api/questionOptions", dataToSend);
-    //   getQuestion();
-    // })
-  }
+    console.log('options to add?', optionsToAdd);
+    optionsToAdd.forEach(async (option) => {
+      const dataToSend = {
+        questionId: question.id,
+        optionId: option.id,
+        isAnswer: false,
+      };
+      await axios.post('/api/questionOptions', dataToSend);
+      getQuestion();
+    });
+  };
 
   React.useEffect(() => {
     getQuestion();
@@ -70,7 +60,7 @@ const SingleQuestion = (props) => {
       </div>
       <div className="question__options">
         <h3>Options:</h3>
-        {!question?.options?.length ? "None associated." : null}
+        {!question?.options?.length ? 'None associated.' : null}
         {question?.options?.map((option) => (
           <div className="question__single-option">
             {option.body} {option.id}
@@ -81,7 +71,7 @@ const SingleQuestion = (props) => {
         <h3>Add options to this question:</h3>
         <div className="question__typeahead">
           <Typeahead
-            // id="basic-typeahead-example"
+            id="question-options"
             labelKey="body"
             multiple={true}
             onChange={setOptionsToAdd}
@@ -91,15 +81,12 @@ const SingleQuestion = (props) => {
           {/* <FormGroup>
           </FormGroup> */}
         </div>
-        <div
-          className="button--submit"
-          onClick={handleSubmit}
-        >
+        <div className="button--submit" onClick={handleSubmit}>
           Submit
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default SingleQuestion;
