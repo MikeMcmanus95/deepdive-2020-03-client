@@ -9,6 +9,7 @@ const AllQuestions = (props) => {
 
   const getQuestions = async () => {
     const { data } = await axios.get('/api/questions');
+    console.log('data>>>>', data);
     setQuestions(data);
   };
 
