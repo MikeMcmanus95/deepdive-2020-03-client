@@ -8,15 +8,15 @@ const AllQuestions = (props) => {
   const [questions, setQuestions] = React.useState([]);
 
   const getQuestions = async () => {
-    const { data } = await axios.get("/api/questions");
+    const { data } = await axios.get('/api/questions');
     setQuestions(data);
-  }
+  };
 
   React.useEffect(() => {
     getQuestions();
   }, []);
-  // console.log('questions >>>', questions);
-  console.log('props in allquestions', props)
+  console.log('questions >>>', questions);
+  console.log('props in allquestions', props);
 
   return (
     <div className="question">
@@ -24,10 +24,11 @@ const AllQuestions = (props) => {
         <h2>Questions</h2>
       </div>
       <div className="question__list">
-        {questions.map(question =>
+        {questions.map((question) => (
           <div className="question__item" key={question.id}>
             <div className="question__item-body">
-              {question.body} <Link to={`/questions/${question.id}`}>{question.id}</Link>
+              {question.body}{' '}
+              <Link to={`/questions/${question.id}`}>{question.id}</Link>
             </div>
             <div className="question__item-instructions">
               {question.instructions}
@@ -37,11 +38,12 @@ const AllQuestions = (props) => {
               itemType="questions"
               history={props.history}
             />
-          </div>)}
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 // <a href={`/${question.id}`}>{question.id}</a>
 // // the difference between using a href and react router link: a href will cause the page to hard refresh/reload
