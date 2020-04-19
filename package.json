@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://codetyke-server.herokuapp.com"
+  "proxy": "http://localhost:8080"
 }
